@@ -1,0 +1,7 @@
+terraform.tfstate
+terraform.tfvars
+.idea/
+*.pem
+*.backup
+.terraform/
+.gcp*
