@@ -1,23 +1,28 @@
-variable "azure_location" {
+variable "location" {
   type = string
   default = "East US 2"
 }
 
-variable "azure_client_id" {
+variable "client_id" {
   type = string
 }
 
-variable "azure_client_secret" {
+variable "client_secret" {
   type = string
 }
 
-variable "azure_subscription_id" {
+variable "subscription_id" {
   type = string
 }
 
-variable "azure_tenant_id" {
+variable "tenant_id" {
   type = string
 }
+
+variable "resource_group_name" {
+  type = string
+}
+
 
 variable "es_cluster" {
   description = "Name of the elasticsearch cluster, used in node discovery"

@@ -27,7 +27,7 @@ resource "azurerm_virtual_machine_scale_set" "data-nodes" {
 
   name = "es-${var.es_cluster}-data-nodes"
   resource_group_name = azurerm_resource_group.elasticsearch.name
-  location = var.azure_location
+  location = var.location
   sku {
     name = var.data_instance_type
     tier = "Standard"
