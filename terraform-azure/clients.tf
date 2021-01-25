@@ -68,7 +68,7 @@ resource "azurerm_virtual_machine_scale_set" "client-nodes" {
     disable_password_authentication = true
     ssh_keys {
       path     = "/home/ubuntu/.ssh/authorized_keys"
-      key_data = file(var.key_path)
+      key_data = var.client_ssh_key
     }
   }
 }

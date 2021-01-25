@@ -15,7 +15,6 @@ variable "resource_group_name" {
   type = string
 }
 
-
 variable "es_cluster" {
   description = "Name of the elasticsearch cluster, used in node discovery"
   default = "my-cluster"
@@ -111,4 +110,16 @@ variable "monitoring_enabled" {
 variable "xpack_monitoring_host" {
   description = "ES host to send monitoring data"
   default     = "self"
+}
+
+variable "client_ssh_key" {
+  type = string
+}
+
+variable "data_ssh_key" {
+  type = string
+}
+
+variable "master_ssh_key" {
+  type = string
 }
