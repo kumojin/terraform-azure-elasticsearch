@@ -19,6 +19,11 @@ variable "azure_tenant_id" {
   type = string
 }
 
+variable "resource_group_name" {
+  type = string
+}
+
+
 variable "es_cluster" {
   description = "Name of the elasticsearch cluster, used in node discovery"
   default = "my-cluster"
