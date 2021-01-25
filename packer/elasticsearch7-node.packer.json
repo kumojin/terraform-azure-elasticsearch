@@ -4,12 +4,12 @@
     {
       "type": "azure-arm",
 
-      "client_id": "{{user `azure_client_id`}}",
-      "client_secret": "{{user `azure_client_secret`}}",
-      "tenant_id": "{{user `azure_tenant_id`}}",
-      "subscription_id": "{{user `azure_subscription_id`}}",
+      "client_id": "{{user `client_id`}}",
+      "client_secret": "{{user `client_secret`}}",
+      "tenant_id": "{{user `tenant_id`}}",
+      "subscription_id": "{{user `subscription_id`}}",
 
-      "managed_image_resource_group_name": "{{user `azure_resource_group_name`}}",
+      "managed_image_resource_group_name": "{{user `resource_group_name`}}",
       "managed_image_name": "elasticsearch7-{{isotime \"2006-01-02T030405\"}}",
 
       "os_type": "Linux",
@@ -17,7 +17,7 @@
       "image_offer": "UbuntuServer",
       "image_sku": "18.04-LTS",
 
-      "location": "{{user `azure_location`}}",
+      "location": "{{user `location`}}",
       "vm_size": "Standard_DS2_v2"
     }
   ],

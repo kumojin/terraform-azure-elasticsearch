@@ -24,7 +24,7 @@ data "template_file" "singlenode_userdata_script" {
 resource "azurerm_public_ip" "single-node" {
   count                        = var.masters_count + var.datas_count == 0 ? 1 : 0
   name                         = "es-${var.es_cluster}-single-node-public-ip"
-  location                     = var.azure_location
+  location                     = var.location
   resource_group_name          = azurerm_resource_group.elasticsearch.name
   allocation_method            = "Static"
   domain_name_label            = azurerm_resource_group.elasticsearch.name
@@ -35,7 +35,7 @@ resource "azurerm_network_interface" "single-node" {
   count = var.masters_count + var.datas_count == 0 ? 1 : 0
 
   name                = "es-${var.es_cluster}-singlenode-nic"
-  location            = var.azure_location
+  location            = var.location
   resource_group_name = azurerm_resource_group.elasticsearch.name
 
   ip_configuration {
@@ -51,7 +51,7 @@ resource "azurerm_virtual_machine" "single-node" {
   count = var.masters_count + var.datas_count == 0 ? 1 : 0
 
   name                  = "es-${var.es_cluster}-singlenode"
-  location              = var.azure_location
+  location              = var.location
   resource_group_name   = azurerm_resource_group.elasticsearch.name
   network_interface_ids = [ azurerm_network_interface.single-node[count.index].id ]
   vm_size               = var.data_instance_type

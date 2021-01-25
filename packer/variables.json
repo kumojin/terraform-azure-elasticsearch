@@ -1,13 +1,13 @@
 {
   "elasticsearch_version": "7.4.0",
 
-  "azure_client_id": "",
-  "azure_client_secret": "",
-  "azure_tenant_id": "",
-  "azure_subscription_id": "",
+  "client_id": "",
+  "client_secret": "",
+  "tenant_id": "",
+  "subscription_id": "",
 
-  "azure_location": "eastus2",
-  "azure_resource_group_name": "",
+  "location": "eastus2",
+  "resource_group_name": "",
 
-  "azure_elasticsearch_image_name": "elasticsearch7-2019-10-07T034222"
+  "elasticsearch_image_name": "elasticsearch7-2019-10-07T034222"
 }

@@ -1,5 +1,5 @@
 resource "azurerm_lb" "clients" {
-  location = var.azure_location
+  location = var.location
   name = "es-${var.es_cluster}-clients-lb"
   resource_group_name = azurerm_resource_group.elasticsearch.name
 
