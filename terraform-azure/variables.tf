@@ -3,14 +3,6 @@ variable "location" {
   default = "East US 2"
 }
 
-variable "client_id" {
-  type = string
-}
-
-variable "client_secret" {
-  type = string
-}
-
 variable "subscription_id" {
   type = string
 }
