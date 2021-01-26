@@ -10,20 +10,17 @@ cluster.name: ${es_cluster}
 node.master: ${master}
 node.data: ${data}
 node.ingest: ${data}
-xpack.security.enabled: ${security_enabled}
-xpack.monitoring.enabled: ${monitoring_enabled}
 path.data: ${elasticsearch_data_dir}
 path.logs: ${elasticsearch_logs_dir}
+bootstrap.memory_lock: true
+xpack.security.enabled: ${security_enabled}
+xpack.monitoring.enabled: ${monitoring_enabled}
 EOF
 
 if [ "${master}" == "true"  ]; then
     cat <<'EOF' >>/etc/elasticsearch/elasticsearch.yml
-cluster.initial_master_nodes: ["${es_cluster}-master000000", "${es_cluster}-master000001", "${es_cluster}-master000002"]
+cluster.initial_master_nodes: ["${es_cluster}-master000000"]
 EOF
-fi
-
-if [ "${master}" == "true"  ] && [ "${data}" == "true" ]; then
-    echo "discovery.type: single-node" >> /etc/elasticsearch/elasticsearch.yml
 fi
 
 if [ "${xpack_monitoring_host}" != "self" ]; then
@@ -38,20 +35,10 @@ fi
 cat <<'EOF' >>/etc/elasticsearch/elasticsearch.yml
 network.host: _site_,localhost
 
-# For discovery we are using predictable hostnames (thanks for the computer name prefix), but could just as well use the
+# For discovery we are using predictable hostnames (thanks to the computer name prefix), but could just as well use the
 # predictable subnet addresses starting at 10.1.0.5.
-EOF
-
-# avoiding discovery noise in single-node scenario
-if [ "${master}" == "true"  ] && [ "${data}" == "true" ]; then
-    cat <<'EOF' >>/etc/elasticsearch/elasticsearch.yml
 discovery.seed_hosts: ["${es_cluster}-master000000", "${es_cluster}-data000000"]
 EOF
-else
-    cat <<'EOF' >>/etc/elasticsearch/elasticsearch.yml
-discovery.seed_hosts: ["${es_cluster}-master000000", "${es_cluster}-master000001", "${es_cluster}-master000002", "${es_cluster}-data000000", "${es_cluster}-data000001"]
-EOF
-fi
 
 cat <<'EOF' >>/etc/security/limits.conf
 
@@ -64,6 +51,8 @@ sudo mkdir -p /etc/systemd/system/elasticsearch.service.d
 cat <<'EOF' >>/etc/systemd/system/elasticsearch.service.d/override.conf
 [Service]
 LimitMEMLOCK=infinity
+LimitFSIZE=infinity
+LimitAS=infinity
 Restart=always
 RestartSec=10
 EOF
