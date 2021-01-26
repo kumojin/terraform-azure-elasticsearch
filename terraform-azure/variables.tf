@@ -1,4 +1,9 @@
 # General cluster options
+variable "images_resource_group_name" {
+  description = "Name of the Resource Group with Kibana and ES images"
+  type = string
+}
+
 variable "location" {
   description = "Azure Region where resources will be created"
   type = string
