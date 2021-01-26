@@ -38,7 +38,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "master-nodes" {
   network_interface {
     name = "es-${var.es_cluster}-net-profile"
     primary = true
-    enable_accelerated_networking = true
 
     ip_configuration {
       name = "es-${var.es_cluster}-ip-profile"
