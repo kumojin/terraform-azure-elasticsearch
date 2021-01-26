@@ -19,11 +19,6 @@ variable "es_cluster" {
   default = "my-cluster"
 }
 
-# TODO: Remove once secret management in place
-variable "ssh_key" {
-  type = string
-}
-
 # General node options
 # ====================
 variable "elasticsearch_data_dir" {
@@ -69,12 +64,15 @@ variable "data_heap_size" {
   type = string
 }
 
+variable "data_ssh_key" {
+  type = string
+}
+
 # Master nodes
 # ============
 variable "master_count" {
   type = number
 }
-
 
 # Recommended to NOT have master node as a data node. OK for small clusters
 variable "master_with_data" {
@@ -92,6 +90,10 @@ variable "master_heap_size" {
   type = string
 }
 
+variable "master_ssh_key" {
+  type = string
+}
+
 # Client nodes
 # ============
 variable "client_count" {
@@ -103,5 +105,9 @@ variable "client_instance_type" {
 }
 
 variable "client_heap_size" {
+  type = string
+}
+
+variable "client_ssh_key" {
   type = string
 }

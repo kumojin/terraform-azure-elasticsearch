@@ -32,7 +32,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "data-nodes" {
 
   admin_ssh_key {
     username   = "ubuntu"
-    public_key = var.ssh_key
+    public_key = var.data_ssh_key
   }
 
   network_interface {
