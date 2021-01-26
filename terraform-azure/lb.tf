@@ -12,7 +12,6 @@ resource "azurerm_lb" "clients" {
 
   frontend_ip_configuration {
     name = "es-${var.es_cluster}-ip"
-    subnet_id = azurerm_subnet.elasticsearch_subnet.id
     private_ip_address_allocation = "dynamic"
     public_ip_address_id = azurerm_public_ip.clients.id
   }
