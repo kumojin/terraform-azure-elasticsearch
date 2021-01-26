@@ -28,7 +28,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "client-nodes" {
   admin_username       = "ubuntu"
   admin_password       = random_string.vm-login-password.result
   computer_name_prefix = "${var.es_cluster}-client"
-  custom_data          = data.template_file.client_userdata_script.rendered
+  custom_data          = base64encode(data.template_file.client_userdata_script.rendered)
 
   admin_ssh_key {
     username   = "ubuntu"
