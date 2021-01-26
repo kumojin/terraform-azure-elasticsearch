@@ -22,7 +22,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "client-nodes" {
   location             = var.location
 
   source_image_id      = data.azurerm_image.kibana.id
-  sku                  = "Standard"
+  sku                  = var.client_instance_type
   instances            = var.client_count
 
   admin_username       = "ubuntu"

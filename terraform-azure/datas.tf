@@ -22,7 +22,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "data-nodes" {
   location             = var.location
 
   source_image_id      = data.azurerm_image.elasticsearch.id
-  sku                  = "Standard"
+  sku                  = var.data_instance_type
   instances            = var.data_count
   
   admin_username       = "ubuntu"
