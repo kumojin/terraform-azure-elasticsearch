@@ -12,7 +12,6 @@ data "template_file" "client_userdata_script" {
     bootstrap_node          = false
     security_enabled        = var.security_enabled
     monitoring_enabled      = var.monitoring_enabled
-    masters_count           = var.masters_count
     xpack_monitoring_host   = var.xpack_monitoring_host
   }
 }

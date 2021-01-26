@@ -12,7 +12,6 @@ data "template_file" "master_userdata_script" {
     bootstrap_node          = false
     security_enabled        = var.security_enabled
     monitoring_enabled      = var.monitoring_enabled
-    masters_count           = var.masters_count
     xpack_monitoring_host   = var.xpack_monitoring_host
   }
 }
@@ -45,7 +44,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "master-nodes" {
       name = "es-${var.es_cluster}-ip-profile"
       primary = true
       subnet_id = azurerm_subnet.elasticsearch_subnet.id
-      load_balancer_backend_address_pool_ids = var.clients_count == 0 ? [ azurerm_lb_backend_address_pool.clients-lb-backend.id ] : []
+      load_balancer_backend_address_pool_ids = var.client_count == 0 ? [ azurerm_lb_backend_address_pool.clients-lb-backend.id ] : []
     }
   }
 
