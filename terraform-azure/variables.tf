@@ -1,61 +1,37 @@
 variable "location" {
-  type = string
-  default = "East US 2"
-}
-
-variable "subscription_id" {
-  type = string
-}
-
-variable "tenant_id" {
+  description = "Azure Region where resources will be created"
   type = string
 }
 
 variable "resource_group_name" {
+  description = "Name of the Resource Group"
   type = string
 }
 
 variable "es_cluster" {
-  description = "Name of the elasticsearch cluster, used in node discovery"
+  description = "Name of the elasticsearch cluster. Used in node discovery"
   default = "my-cluster"
-}
-
-variable "key_path" {
-  description = "Key name to be used with the launched instances."
-  default = "~/.ssh/id_rsa.pub"
-}
-
-variable "environment" {
-  default = "default"
 }
 
 variable "data_instance_type" {
   type = string
-  default = "Standard_D4S_v3"
+  default = "Standard_D4S_v3" # 4x vCPU, 16GB RAM
 }
 
-# If the master will be a data node too, you may want to switch the instance type to Standard_D4S_v3
+# If the master will be a data node, the data_instance_type should be used
 variable "master_instance_type" {
   type = string
-  default = "Standard_D2S_v3"
+  default = "Standard_D2S_v3" # 2x vCPU, 8GB RAM
 }
 
 variable "client_instance_type" {
   type = string
-  default = "Standard_A2_v2"
+  default = "Standard_A2_v2" # 2x vCPU, 4GB RAM
 }
 
 variable "elasticsearch_volume_size" {
   type = string
-  default = "100" # gb
-}
-
-variable "use_instance_storage" {
-  default = true
-}
-
-variable "associate_public_ip" {
-  default = true
+  default = "100" # GB
 }
 
 variable "elasticsearch_data_dir" {
@@ -66,14 +42,15 @@ variable "elasticsearch_logs_dir" {
   default = "/var/log/elasticsearch"
 }
 
-# default elasticsearch heap size
+# Default elasticsearch heap size
 variable "data_heap_size" {
   type = string
   default = "8g"
 }
 
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#heap-size-settings
+# Should be 50% of the total memory vailable
 variable "master_heap_size" {
-  description = "Should be 50% of the total memory vailable"
   type = string
   default = "4g"
 }
@@ -97,12 +74,12 @@ variable "clients_count" {
   default = 0
 }
 
-# whether or not to enable x-pack security on the cluster
+# x-pack security on the cluster
 variable "security_enabled" {
   default = false
 }
 
-# whether or not to enable x-pack monitoring on the cluster
+# x-pack monitoring on the cluster
 variable "monitoring_enabled" {
   default = true
 }

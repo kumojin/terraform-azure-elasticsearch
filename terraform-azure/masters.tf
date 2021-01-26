@@ -7,7 +7,6 @@ data "template_file" "master_userdata_script" {
     elasticsearch_logs_dir  = var.elasticsearch_logs_dir
     heap_size               = var.master_heap_size
     es_cluster              = var.es_cluster
-    es_environment          = "${var.environment}-${var.es_cluster}"
     security_groups         = ""
     availability_zones      = ""
     minimum_master_nodes    = format("%d", floor(var.masters_count / 2 + 1))
@@ -22,7 +21,7 @@ data "template_file" "master_userdata_script" {
   }
 }
 
-resource "azurerm_virtual_machine_scale_set" "master-nodes" {
+resource "azurerm_linux_virtual_machine_scale_set" "master-nodes" {
   count = var.masters_count == 0 ? 0 : 1
 
   name = "es-${var.es_cluster}-master-nodes"

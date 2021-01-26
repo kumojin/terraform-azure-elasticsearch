@@ -33,6 +33,6 @@ resource "azurerm_lb_rule" "clients-lb-rule" {
   frontend_ip_configuration_name = "es-${var.es_cluster}-ip"
   backend_address_pool_id = azurerm_lb_backend_address_pool.clients-lb-backend.id
   protocol = "Tcp"
-  loadbalancer_id = azurerm_lb.clients.id
   resource_group_name = azurerm_resource_group.elasticsearch.name
+  loadbalancer_id = azurerm_lb.clients.id
 }
