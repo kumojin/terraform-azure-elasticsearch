@@ -4,7 +4,7 @@ exec > >(tee /var/log/user-data.log | logger -t user-data -s 2>/dev/console) 2>&
 
 # Configure elasticsearch
 cat <<'EOF' >>/etc/elasticsearch/elasticsearch.yml
-cluster.name: ${es_cluster}
+cluster.name: ${cluster_name}
 
 # only data nodes should have ingest and http capabilities
 node.master: ${master}
@@ -19,7 +19,7 @@ EOF
 
 if [ "${master}" == "true"  ]; then
     cat <<'EOF' >>/etc/elasticsearch/elasticsearch.yml
-cluster.initial_master_nodes: ["${es_cluster}-master000000"]
+cluster.initial_master_nodes: ["${cluster_name}-master000000"]
 EOF
 fi
 
@@ -37,7 +37,7 @@ network.host: _site_,localhost
 
 # For discovery we are using predictable hostnames (thanks to the computer name prefix), but could just as well use the
 # predictable subnet addresses starting at 10.1.0.5.
-discovery.seed_hosts: ["${es_cluster}-master000000", "${es_cluster}-data000000"]
+discovery.seed_hosts: ["${cluster_name}-master000000", "${cluster_name}-data000000"]
 EOF
 
 cat <<'EOF' >>/etc/security/limits.conf

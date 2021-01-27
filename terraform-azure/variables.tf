@@ -14,7 +14,7 @@ variable "resource_group_name" {
   type = string
 }
 
-variable "es_cluster" {
+variable "cluster_name" {
   description = "Name of the elasticsearch cluster. Used in node discovery"
   default = "my-cluster"
 }

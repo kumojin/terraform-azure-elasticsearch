@@ -6,7 +6,7 @@ data "template_file" "data_userdata_script" {
     elasticsearch_data_dir  = var.elasticsearch_data_dir
     elasticsearch_logs_dir  = var.elasticsearch_logs_dir
     heap_size               = var.data_heap_size
-    es_cluster              = var.es_cluster
+    cluster_name              = var.cluster_name
     master                  = false
     data                    = true
     bootstrap_node          = false # TODO: Understand
@@ -17,7 +17,7 @@ data "template_file" "data_userdata_script" {
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "data-nodes" {
-  name                 = "es-${var.es_cluster}-data-nodes"
+  name                 = "es-${var.cluster_name}-data-nodes"
   resource_group_name  = azurerm_resource_group.elasticsearch.name
   location             = var.location
 
@@ -28,7 +28,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "data-nodes" {
   admin_username                  = "ubuntu"
   disable_password_authentication = true # admin_password disables ssh
 
-  computer_name_prefix = "${var.es_cluster}-data"
+  computer_name_prefix = "${var.cluster_name}-data"
   custom_data          = base64encode(data.template_file.client_userdata_script.rendered)
 
   admin_ssh_key {
@@ -37,12 +37,12 @@ resource "azurerm_linux_virtual_machine_scale_set" "data-nodes" {
   }
 
   network_interface {
-    name = "es-${var.es_cluster}-net-profile"
+    name = "es-${var.cluster_name}-net-profile"
     primary = true
     enable_accelerated_networking = true # TODO: Understand
 
     ip_configuration {
-      name = "es-${var.es_cluster}-ip-profile"
+      name = "es-${var.cluster_name}-ip-profile"
       primary = true
       subnet_id = azurerm_subnet.elasticsearch_subnet.id
       load_balancer_backend_address_pool_ids = var.client_count == 0 ? [ azurerm_lb_backend_address_pool.clients-lb-backend.id ] : []
