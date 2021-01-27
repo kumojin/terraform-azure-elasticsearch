@@ -13,3 +13,7 @@ output "vm_password" {
 output "clients_lb_public_ip" {
   value = azurerm_public_ip.clients.ip_address
 }
+
+output "es_subnet_id" {
+  value = azurerm_subnet.elasticsearch_subnet.id
+}

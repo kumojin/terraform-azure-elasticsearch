@@ -25,8 +25,9 @@ resource "azurerm_linux_virtual_machine_scale_set" "data-nodes" {
   sku                  = var.data_instance_type
   instances            = var.data_count
   
-  admin_username       = "ubuntu"
-  admin_password       = random_string.vm-login-password.result
+  admin_username                  = "ubuntu"
+  disable_password_authentication = true # admin_password disables ssh
+
   computer_name_prefix = "${var.es_cluster}-data"
   custom_data          = base64encode(data.template_file.client_userdata_script.rendered)
 

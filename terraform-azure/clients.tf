@@ -25,8 +25,9 @@ resource "azurerm_linux_virtual_machine_scale_set" "client-nodes" {
   sku                  = var.client_instance_type
   instances            = var.client_count
 
-  admin_username       = "ubuntu"
-  admin_password       = random_string.vm-login-password.result
+  admin_username                  = "ubuntu"
+  disable_password_authentication = true # admin_password disables ssh
+t
   computer_name_prefix = "${var.es_cluster}-client"
   custom_data          = base64encode(data.template_file.client_userdata_script.rendered)
 

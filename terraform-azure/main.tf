@@ -6,7 +6,7 @@ resource "random_string" "vm-login-password" {
 
 resource "azurerm_resource_group" "elasticsearch" {
   location = var.location
-  name = "elasticsearch-cluster-${var.es_cluster}"
+  name = var.resource_group_name
 }
 
 resource "azurerm_virtual_network" "elasticsearch_vnet" {
