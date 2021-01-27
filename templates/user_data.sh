@@ -12,7 +12,6 @@ node.data: ${data}
 node.ingest: ${data}
 path.data: ${elasticsearch_data_dir}
 path.logs: ${elasticsearch_logs_dir}
-bootstrap.memory_lock: true
 xpack.security.enabled: ${security_enabled}
 xpack.monitoring.enabled: ${monitoring_enabled}
 EOF
