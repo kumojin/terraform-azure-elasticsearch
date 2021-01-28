@@ -110,9 +110,6 @@
 xpack.security.enabled: false
 xpack.monitoring.enabled: true
 xpack.reporting.enabled: false
-logging.verbose: true
 
 server.host: "0.0.0.0"
 server.port: 5601
-
-elasticsearch.hosts: ["http://default-data000000:9200"]
