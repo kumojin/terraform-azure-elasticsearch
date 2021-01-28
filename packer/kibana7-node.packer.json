@@ -24,6 +24,16 @@
   "provisioners": [
     {
       "type": "shell",
+      "script": "update-machine.sh",
+      "execute_command": "echo '' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+    },
+    {
+      "type": "file",
+      "source": "../templates/kibana.yml",
+      "destination": "kibana.yml"
+    },
+    {
+      "type": "shell",
       "script": "install-kibana7.sh",
       "environment_vars": [ "ES_VERSION={{user `elasticsearch_version`}}" ],
       "execute_command": "echo '' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"

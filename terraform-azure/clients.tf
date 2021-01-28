@@ -1,18 +1,11 @@
 data "template_file" "client_userdata_script" {
-  template = file("${path.module}/../templates/user_data.sh")
+  template = file("${path.module}/../templates/user_data.kibana.sh")
 
   vars = {
-    volume_name             = ""
-    elasticsearch_data_dir  = "/var/lib/elasticsearch"
-    elasticsearch_logs_dir  = var.elasticsearch_logs_dir
-    heap_size               = var.client_heap_size
-    cluster_name              = var.cluster_name
-    master                  = false
-    data                    = false
-    bootstrap_node          = false
+    cluster_name            = var.cluster_name
+    data_node_count         = var.data_count
     security_enabled        = var.security_enabled
     monitoring_enabled      = var.monitoring_enabled
-    xpack_monitoring_host   = var.xpack_monitoring_host
   }
 }
 

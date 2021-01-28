@@ -1,12 +1,12 @@
 data "template_file" "data_userdata_script" {
-  template = file("${path.module}/../templates/user_data.sh")
+  template = file("${path.module}/../templates/user_data.elasticsearch.sh")
 
   vars = {
     volume_name             = ""
     elasticsearch_data_dir  = var.elasticsearch_data_dir
     elasticsearch_logs_dir  = var.elasticsearch_logs_dir
     heap_size               = var.data_heap_size
-    cluster_name              = var.cluster_name
+    cluster_name            = var.cluster_name
     master                  = false
     data                    = true
     bootstrap_node          = false # TODO: Understand

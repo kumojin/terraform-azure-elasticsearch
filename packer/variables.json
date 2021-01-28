@@ -1,13 +1,13 @@
 {
   "elasticsearch_version": "7.4.0",
 
-  "client_id": "",
-  "client_secret": "",
-  "tenant_id": "",
-  "subscription_id": "",
+  "client_id": "ed672442-594b-4dbb-9313-1972fb3604b3",
+  "client_secret": "4ULF.vSPmzr-.VMPp~4I8JOvQS.-cI17OQ",
+  "tenant_id": "7a6a3539-0333-441f-974b-d0f7dba6342d",
+  "subscription_id": "e41b161c-69a1-47cc-87ba-c7ff74454f2c",
 
-  "location": "eastus2",
-  "resource_group_name": "",
+  "location": "westeurope",
+  "resource_group_name": "packer-elasticsearch-images",
 
   "elasticsearch_image_name": "elasticsearch7-2019-10-07T034222"
 }

@@ -14,6 +14,7 @@ path.data: ${elasticsearch_data_dir}
 path.logs: ${elasticsearch_logs_dir}
 xpack.security.enabled: ${security_enabled}
 xpack.monitoring.enabled: ${monitoring_enabled}
+xpack.license.self_generated.type: basic
 EOF
 
 if [ "${master}" == "true"  ]; then
@@ -32,7 +33,7 @@ fi
 
 # Azure doesn't have a proper discovery plugin, hence we are going old-school and relying on scaleset name prefixes
 cat <<'EOF' >>/etc/elasticsearch/elasticsearch.yml
-network.host: _site_,localhost
+network.host: [_site_, localhost]
 
 # For discovery we are using predictable hostnames (thanks to the computer name prefix), but could just as well use the
 # predictable subnet addresses starting at 10.1.0.5.
@@ -106,6 +107,7 @@ else
     if [ -f "/etc/kibana/kibana.yml" ]; then
         echo "xpack.security.enabled: ${security_enabled}" | sudo tee -a /etc/kibana/kibana.yml
         echo "xpack.monitoring.enabled: ${monitoring_enabled}" | sudo tee -a /etc/kibana/kibana.yml
+        echo "xpack.reporting.enabled: false" | sudo tee -a /etc/kibana/kibana.yml
         systemctl daemon-reload
         systemctl enable kibana.service
         sudo service kibana restart

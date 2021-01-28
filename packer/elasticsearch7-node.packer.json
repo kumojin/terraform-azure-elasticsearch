@@ -42,18 +42,6 @@
       "script": "install-elasticsearch7.sh",
       "environment_vars": [ "ES_VERSION={{user `elasticsearch_version`}}" ],
       "execute_command": "echo '' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
-    },
-    {
-      "type": "shell",
-      "script": "install-cloud-plugin.sh"
-    },
-    {
-      "type": "shell",
-      "script": "install-beats.sh"
-    },
-    {
-      "type": "shell",
-      "script": "install-custom.sh"
     }
   ]
 }

@@ -3,7 +3,6 @@ set -e
 
 # Get the PGP Key
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-
 echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list
 
 # Fix for the apt lock issue
@@ -17,6 +16,10 @@ else
     echo "Installing Kibana version $ES_VERSION"
     apt-get install kibana=$ES_VERSION
 fi
+
+# apt-get install libnss
+
+mv kibana.yml /etc/kibana/kibana.yml
 
 # This needs to be here explicitly because of a long first-initialization time of Kibana
 systemctl daemon-reload
