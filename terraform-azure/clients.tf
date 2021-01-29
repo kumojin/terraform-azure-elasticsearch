@@ -10,7 +10,7 @@ data "template_file" "client_userdata_script" {
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "client-nodes" {
-  name                 = "es-${var.cluster_name}-client-nodes"
+  name                 = "vmss-es-${var.cluster_name}-clients"
   resource_group_name  = azurerm_resource_group.elasticsearch.name
   location             = var.location
 

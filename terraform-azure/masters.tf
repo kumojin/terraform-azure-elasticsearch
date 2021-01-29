@@ -17,7 +17,7 @@ data "template_file" "master_userdata_script" {
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "master-nodes" {
-  name                 = "es-${var.cluster_name}-master-nodes"
+  name                 = "vmss-es-${var.cluster_name}-masters"
   resource_group_name  = azurerm_resource_group.elasticsearch.name
   location             = var.location
 
@@ -29,7 +29,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "master-nodes" {
   disable_password_authentication = true # admin_password disables ssh
 
   computer_name_prefix = "${var.cluster_name}-master"
-  custom_data          = base64encode(data.template_file.client_userdata_script.rendered)
+  custom_data          = base64encode(data.template_file.data_userdata_script.rendered)
 
   admin_ssh_key {
     username   = "ubuntu"
